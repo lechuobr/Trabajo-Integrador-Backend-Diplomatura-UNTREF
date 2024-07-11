@@ -1,0 +1,40 @@
+###
+POST http://localhost:3000/Newprendas
+Content-Type: application/json
+
+{
+    "nombre":"Bakend Untref",
+    "precio":"5000",
+    "categoria":"Remera"
+}
+
+###
+GET http://localhost:3000/prendas/all
+
+###
+
+DELETE http://localhost:3000/prendas/id/668eb74b9dc66c7701468bc9
+
+###
+PATCH http://localhost:3000/prendas/Modifict/668eb74b9dc66c7701468bc9
+Content-Type: application/json
+
+{
+   "precio":"12"
+}
+
+###
+POST  http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "nombre":"jesus",
+    "clave":1234
+}
+
+###
+GET http://localhost:3000/Desconexion
+
+
+
+
