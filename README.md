@@ -50,14 +50,14 @@ Start the server
 |--|--|
 |Status code <span style="color:green">200</span>  |Respuesta 
 |
-```bash
+```
  Bienvenido a la ferias de ropa!!
 ```
 |||
 |--|--|
 |Status code <span style="color:red">400</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Error 400"
 }
@@ -72,7 +72,7 @@ Start the server
 |Status code <span style="color:green">200</span>  |Respuesta JSON
 |
 
-```bash
+```
 {
     "_id": "66741fd7643a5ec565f30659",
     "codigo": 3,
@@ -93,7 +93,7 @@ Start the server
 |--|--|
 |Status code <span style="color:red">400</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Error 400"
 }
@@ -102,7 +102,7 @@ Start the server
 |--|--|
 |Status code <span style="color:yellow">500</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Servidor Inestable"
 }
@@ -117,7 +117,7 @@ Start the server
 |Status code <span style="color:green">200</span>  |Respuesta 
 |
 
-```bash
+```
 {
   "_id": "66741fd7643a5ec565f3065d",
   "codigo": 7,
@@ -130,7 +130,7 @@ Start the server
 |--|--|
 |Status code <span style="color:red">401</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "ID invalido"
 }
@@ -139,7 +139,7 @@ Start the server
 |--|--|
 |Status code <span style="color:yellow">500</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Servidor Inestable"
 }
@@ -155,7 +155,7 @@ Start the server
 |--|--|
 |Status code <span style="color:green">200</span>  |Respuesta 
 |
- ```bash
+ ```
  {
     "_id": "66741fd7643a5ec565f30658",
     "codigo": 2,
@@ -168,7 +168,7 @@ Start the server
 |--|--|
 |Status code <span style="color:red">401</span>  |Respuesta JSON
 |
-  ```bash
+  ```
   {
   "mensaje": "Sin prenda"
 }
@@ -177,7 +177,7 @@ Start the server
 |--|--|
 |Status code <span style="color:yellow">500</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Servidor Inestable"
 }
@@ -204,7 +204,7 @@ Content-Type: application/json
 |--|--|
 |Status code <span style="color:green">201</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "nueva prenda agregada",
   "docs": {
@@ -227,7 +227,7 @@ ERROR DE VALIDACION
 |--|--|
 |Status code <span style="color:yellow">500</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Servidor Inestable"
 }
@@ -251,7 +251,7 @@ Content-Type: application/json
 |--|--|
 |Status code <span style="color:green">201</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Prenda Actualizada",
   "docs": {
@@ -274,7 +274,7 @@ Content-Type: application/json
 |--|--|
 |Status code <span style="color:yellow">500</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Servidor Inestable"
 }
@@ -289,7 +289,7 @@ Content-Type: application/json
 |Status code <span style="color:green">200</span>  |Respuesta JSON
 |
 
-```bash
+```
 {
   "mensaje": "prenda eliminada",
   "docs": {
@@ -313,7 +313,7 @@ ID incorrecto
 |--|--|
 |Status code <span style="color:yellow">500</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Servidor Inestable"
 }
@@ -349,7 +349,7 @@ Content-Type: application/json
 |--|--|
 |Status code <span style="color:red">400</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "usuario invalido"
 }
@@ -358,7 +358,7 @@ Content-Type: application/json
 |--|--|
 |Status code <span style="color:yellow">500</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Servidor Inestable"
 }
@@ -372,7 +372,7 @@ Content-Type: application/json
 |--|--|
 |Status code <span style="color:green">200</span>  |Respuesta JSON
 |
-```bash
+```
 {
   "mensaje": "Desconectado"
 }
