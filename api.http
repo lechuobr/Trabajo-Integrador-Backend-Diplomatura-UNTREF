@@ -11,12 +11,13 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/prendas/all
 
-###
-
-DELETE http://localhost:3000/prendas/id/668eb74b9dc66c7701468bc9
 
 ###
-PATCH http://localhost:3000/prendas/Modifict/668eb74b9dc66c7701468bc9
+
+DELETE http://localhost:3000/prendas/id/6697f41a34cfacc0b93f3347
+
+###
+PATCH http://localhost:3000/prendas/Modifict/66952a6e7d3eef55b2a666
 Content-Type: application/json
 
 {
@@ -34,6 +35,9 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/Desconexion
+
+
+
 
 
 

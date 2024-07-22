@@ -7,52 +7,33 @@ const secretkey=process.env.SECRETKEY
 const prendas=require('./databse.js')
 const morgan=require ('morgan')
 const jwt=require('jsonwebtoken')
-const session = require('express-session')
 const cookieParser= require ('cookie-parser')
-const user=[{
-  nombre:"jesus",
-  clave:1234,
-  id:1
-
-}]
+const usuario=require('./user.js')
 
 function autorizacion(req,res,next){
   const token=req.cookies.token
   console.log(token)
   if(token){
     jwt.verify(token,secretkey,(error,decoded)=>{
-      if(error){
-        return res.status(401).json({mensaje:"Debes estar registrado"})
-        
-      }else{
-        req.userid=decoded.id
-        next()
-      }
+      if(error) return res.status(400).json({mensaje:"ERRor"})
+       req.userid=decoded.id
+      next() 
     })
   }else{
-    res.status(401).json({mensaje:"Debes estar registrado"})
+    res.status(401).json({mensaje:"SIN autorizacion"})
   }
-  
 }
 
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
-app.use(
-  session({
-    secret: 'nuestra-clave-secreta-larga-con-caracteres-raros',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false }
-  })
-)
 
 app.get('/',(req,res)=>{
     res.send('Bienvenidos a la feria de ropa')
 })
 
-app.get('/prendas/all',async(req,res)=>{
+app.get('/prendas/all',autorizacion,async(req,res)=>{
     try {
         const prenda=await prendas.find()
         res.status(200).json(prenda)
@@ -61,7 +42,18 @@ app.get('/prendas/all',async(req,res)=>{
     }
 })
 
-app.get('/prendas/id/:id',async(req,res)=>{
+app.post('/register',async(req,res)=>{
+  const {nombre,clave}=req.body
+  const nuevouser=new usuario(req.body)
+  try {
+    await nuevouser.save()
+    res.send("Registrado")
+  } catch (error) {
+    res.status(500).json({mensaje:"error al registrar"})
+  }
+})
+
+app.get('/prendas/id/:id',autorizacion,async(req,res)=>{
     const {id}=req.params
     try {
         const prendaId= await prendas.findById(id)
@@ -74,21 +66,25 @@ app.get('/prendas/id/:id',async(req,res)=>{
 
 app.post('/login',async(req,res)=>{
   const {nombre,clave}=req.body
-  const persona=user.find((p)=>p.nombre==nombre && p.clave==clave)
-    if (persona) {
-    const token=jwt.sign({id:persona.id},secretkey,{expiresIn:'1h'})
-    res.cookie('token', token, { httpOnly: true, secure: false })
-    req.session.token = token
-    req.session.userid = persona.id
-    res.json({ mensaje: 'Registro exitoso' })
-  } else {
-    res.status(401).json({mensaje:"Usuario invalido"})
-    
+  try {
+    const persona=await usuario.find()
+    const valido=persona.find((u)=>u.nombre==nombre && u.clave==clave)
+    if(valido){
+      const token = jwt.sign(
+        { id: valido.id },secretkey,{ expiresIn: '1h' })
+        res.cookie('token', token, { httpOnly: true, secure: false })
+        res.json({ mensaje: 'Inicio de sesión exitoso' })
+    }else{
+      res.status(400).json({mensaje:"usuario invalido"})
+    }
+  } catch (error) {
+    res.status(500).json({mensaje:"Server Inestable"})
   }
-
+  
 })
+  
 
-app.get('/prendas/nombre/:nombre',async(req,res)=>{
+app.get('/prendas/nombre/:nombre',autorizacion,async(req,res)=>{
     const {nombre}=req.params
     try {
         const prendaName= await prendas.find({nombre:{$regex:nombre,$options:'i'}})
@@ -103,15 +99,17 @@ app.get('/prendas/nombre/:nombre',async(req,res)=>{
 })
 
 app.get('/Desconexion',(req,res)=>{
-  req.session.destroy((error)=>{
-    if(error){
-      res.status(500).json({mensaje:"Error al Desconectar"})
-    }else{
-      res.clearCookie('token')
-      res.json({mensaje:"Desconectado"})
-    }
-  })
+  const user=req.cookies.token
+  console.log(user)
+  if (user) {
+    res.clearCookie('token')
+    res.send("Desconectado")
+    
+  } else {
+    res.status(400).json({mensaje:"Ya estas desconectado"})
+  }
 })
+  
 
 app.post('/Newprendas',autorizacion,async(req,res)=>{
    const Nuevaprenda= new prendas(req.body)
@@ -121,7 +119,7 @@ app.post('/Newprendas',autorizacion,async(req,res)=>{
  try {
     await prendafinal.save()
    .then((docs)=>res.json({mensaje:"nueva prenda agregada",docs}))
-   .catch((eror)=>res.send("Error de validacion"))
+   .catch((eror)=>res.status(400)("Error de validacion"))
    } catch (error) {
     res.status(500).json({mensaje:"Server Inestable"})
   }

@@ -1,109 +1,380 @@
-# Proyecto Integrador: CRUD con Node.js y MongoDB
+# API REST
 
-## Descripción del Proyecto
+<p>Api  desarrollada con Nodejs-express-mongoose para realizar CRUD en base de datos MongoDB</p>
+  
+## version
+- node v22.2.0
+- cookie-parser 1.4.6
+-  express  4.19.2
+-  mongoose 8.5.0
+  
 
-En este proyecto, desarrollarás una aplicación basada en Node.js y MongoDB que permita realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en una base de datos. La base de datos MongoDB deberá estar generada en el clúster de mongodb.com y tu aplicación Node.js se conectará a ella.
 
-Podrás usar alguno de los datasets JSON proporcionados, o crear uno propio que contenga entre 20 y 30 productos, distribuidos en varias categorías.
+## Run Locally
 
-## Datasets Proporcionados
+Clone the project
 
-- **computacion.json**: Productos de computación, partes, accesorios y repuestos.
-- **electronicos.json**: Productos electrónicos de consumo.
-- **granjas.json**: Frutas y verduras.
-- **mobiliario.json**: Muebles de hogar y oficina.
-- **prendas.json**: Prendas de vestir.
-- **supermercado.json**: Productos de supermercado.
-
-## Funcionalidades del CRUD
-
-1. **Obtener todos los productos**
-   - Endpoint para leer todos los productos de la colección.
-   - Control de errores para manejar la indisponibilidad de la base de datos.
-
-2. **Obtener un producto**
-   - Endpoint para obtener un producto por su ID.
-   - Control de errores para manejar casos en que el producto no se encuentre o la base de datos no esté disponible.
-
-3. **Filtrar productos**
-   - Endpoint para filtrar productos por nombre (búsqueda parcial).
-   - Control de errores para manejar coincidencias no encontradas o problemas de conexión.
-
-4. **Agregar un nuevo producto**
-   - Endpoint para agregar un nuevo producto.
-   - Validación y control de errores.
-   - Generación de un código numérico para el nuevo producto.
-
-5. **Modificar el precio de un producto**
-   - Endpoint para cambiar el precio de un producto usando PATCH.
-   - Control de errores para manejar problemas durante la actualización.
-     
-6. **Borrar un producto**
-   - Endpoint para borrar un producto usando DELETE.
-   - Control de errores para manejar problemas durante el borrado.
-
-7. **Control de errores**
-   - Manejo de errores en la estructura de las solicitudes y respuestas.
-   - Respuesta adecuada con mensajes y códigos de error específicos.
-   - Control de acceso a rutas no existentes con respuestas apropiadas.
-
-## Fechas Importantes
-
-- **Avance del Proyecto**: 11 de julio de 2024
-  - Tener listos los endpoints básicos, el control de rutas inexistentes, la conexión con MongoDB y los métodos GET funcionando.
-
-- **Presentación Final**: 30 de julio de 2024
-  - Proyecto 100% funcional.
-
-## Estructura del Repositorio
-
-```plaintext
-/json
-  - computacion.json
-  - electronicos.json
-  - granjas.json
-  - mobiliario.json
-  - prendas.json
-  - supermercado.json
-/README.md
-/app.js
-/database.js
-/product.js
+```bash
+  git clone https://github.com/lechuobr/Trabajo-Integrador-Backend-Diplomatura-UNTREF.git
 ```
 
-### Descripción de Archivos
+Go to the project directory
 
-- **/json**: Carpeta que contiene los datasets JSON.
-- **/README.md**: Archivo con la descripción del proyecto.
-- **/app.js**: Archivo principal de la aplicación Node.js donde se define toda la lógica de rutas y la conexión a la base de datos.
-- **/database.js**: Archivo para configurar la conexión a la base de datos MongoDB.
-- **/product.js**: Archivo que contiene el esquema (schema) del producto utilizando Mongoose.
+```bash
+  cd my-project
+```
 
-## Instrucciones de Entrega
+Install dependencies
+```bash
+  npm install
+  express
+  mongoose
+  cookie-parser
+  jsonwebtoken
+```
+Start the server
 
-1. **Fork** el repositorio desde [aquí](https://github.com/FabioDrizZt/Trabajo-Integrador-Backend-Diplomatura-UNTREF/fork).
-2. **Clona** tu fork en tu máquina local.
-   ```bash
-   git clone https://github.com/tu-usuario/tu-repositorio-fork.git
-   ```
-3. Realiza los cambios y sube tu código a tu fork.
-4. **Sube** los cambios a tu fork.
-   ```bash
-   git add .
-   git commit -m "Descripción de los cambios"
-   git push origin main
-   ```
+```bash
+  node app.js
+```
 
-5. Agrega a los siguientes usuarios como colaboradores en tu repositorio:
-   - [FabioDrizZt](https://github.com/FabioDrizZt)
-   - [JuanNebbia](https://github.com/JuanNebbia)
-   - [NKrein](https://github.com/NKrein)
-   - [mathiasbarbosa](https://github.com/mathiasbarbosa)
+## API Reference
+### Get inicio
 
-## Conclusión
+|   GET    | http://localhost:3000/|
+|----------|------------------------|
+<p>Iniciamos nuestro servidor local en el puerto 3000
+ </p>
 
-Este proyecto te permitirá aplicar tus conocimientos en desarrollo backend con Node.js y MongoDB, implementando un CRUD completo con control de errores y buenas prácticas. ¡Buena suerte y adelante con el desarrollo!
+|||
+|--|--|
+|Status code <span style="color:green">200</span>  |Respuesta 
+|
+```bash
+ Bienvenido a la ferias de ropa!!
+```
+|||
+|--|--|
+|Status code <span style="color:red">400</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Error 400"
+}
+```
+ ### Buscar todas las prendas
+|   GET    | http://localhost:3000/prendas/all|
+|----------|------------------------|
+<p> Para obtener todas la Prendas en nuestra base de datos </p>
 
----
+|||
+|--|--|
+|Status code <span style="color:green">200</span>  |Respuesta JSON
+|
 
-Recuerda mantener tu código limpio, documentado y seguir las buenas prácticas de desarrollo. ¡Nos vemos en clase para revisar tu progreso el 11 de julio de 2024!
+```bash
+{
+    "_id": "66741fd7643a5ec565f30659",
+    "codigo": 3,
+    "nombre": "Camisa Manga Larga",
+    "precio": 34.99,
+    "categoria": "Camisas"
+  },
+  {
+    "_id": "66741fd7643a5ec565f3065c",
+    "codigo": 6,
+    "nombre": "Blusa Estampada",
+    "precio": 12,
+    "categoria": "Outfit"
+  },
+  ......
+```
+|||
+|--|--|
+|Status code <span style="color:red">400</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Error 400"
+}
+```
+|||
+|--|--|
+|Status code <span style="color:yellow">500</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Servidor Inestable"
+}
+```
+### Buscar prendas por ID
+|   GET    | http://localhost:3000/prendas/id/66741fd7643a5ec565f3065d|
+|----------|------------------------|
+<p> Buscamos una prenda en nuestra base de datos por ID parametro tipo numerico</p>
+
+|||
+|--|--|
+|Status code <span style="color:green">200</span>  |Respuesta 
+|
+
+```bash
+{
+  "_id": "66741fd7643a5ec565f3065d",
+  "codigo": 7,
+  "nombre": "Camiseta Deportiva",
+  "precio": 14.99,
+  "categoria": "Outfit"
+}
+```
+|||
+|--|--|
+|Status code <span style="color:red">401</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "ID invalido"
+}
+```
+|||
+|--|--|
+|Status code <span style="color:yellow">500</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Servidor Inestable"
+}
+```
+
+### Get Prendas por nombre 
+
+|   GET    | http://localhost:3000/prendas/nombre/remera|
+|----------|------------------------|
+ <p> Buscamo una prenda en nuestra base de datos por nombre ,las busquedas pueden ser parciales</p>
+ 
+ |||
+|--|--|
+|Status code <span style="color:green">200</span>  |Respuesta 
+|
+ ```bash
+ {
+    "_id": "66741fd7643a5ec565f30658",
+    "codigo": 2,
+    "nombre": "Remera Algodón",
+    "precio": 19.99,
+    "categoria": "Remeras"
+  }
+  ```
+|||
+|--|--|
+|Status code <span style="color:red">401</span>  |Respuesta JSON
+|
+  ```bash
+  {
+  "mensaje": "Sin prenda"
+}
+  ```
+  |||
+|--|--|
+|Status code <span style="color:yellow">500</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Servidor Inestable"
+}
+```
+  
+  ### Post sumar nueva prenda 
+  |   POST   | http://localhost:3000/Newprendas
+|----------|------------------------|
+<p>Para sumar una prenda en nuestra base de datos,
+en el body ponemos en formato JSON nombre,precios,categoria.
+
+No necesitamos poner ID de eso se encarga Mongoose,y del codigo se encarga Nuestra api</p>
+
+```bash
+Content-Type: application/json
+
+{
+    "nombre":"Bakend Untref",
+    "precio":"5000",
+    "categoria":"Remera"
+}
+```
+|||
+|--|--|
+|Status code <span style="color:green">201</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "nueva prenda agregada",
+  "docs": {
+    "nombre": "Bakend Untref",
+    "precio": 5000,
+    "categoria": "Remera",
+    "_id": "6697f45434cfacc0b93f334a",
+    "codigo": 33
+  }
+}
+```
+|||
+|--|--|
+|Status code <span style="color:red">401</span>  |Respuesta 
+|
+```
+ERROR DE VALIDACION
+```
+  |||
+|--|--|
+|Status code <span style="color:yellow">500</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Servidor Inestable"
+}
+```
+### Patch modificar prenda
+ |   PATCH   | http://localhost:3000/prendas/Modifict/:id
+|----------|------------------------|
+<p>Para Actualizar una prenda en nuestra base de datos pasamos como parametro el ID de la prenda a actualizar.
+
+En el body solo ponemos el campo a actualizar en este ejemplo el "Precio"</p>
+
+```bash
+Content-Type: application/json
+
+{
+   "precio":"12"
+}
+
+```
+|||
+|--|--|
+|Status code <span style="color:green">201</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Prenda Actualizada",
+  "docs": {
+    "_id": "66952a6e7d3eef55b2a66689",
+    "nombre": "Bakend Untref",
+    "precio": 12,
+    "categoria": "Remera",
+    "codigo": 31
+  }
+}
+```
+|||
+|--|--|
+|Status code <span style="color:red">400</span>  |Respuesta 
+|
+```
+ ID incorrecto
+```
+  |||
+|--|--|
+|Status code <span style="color:yellow">500</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Servidor Inestable"
+}
+```
+### Delete Prenda
+  DELETE   | http://localhost:3000/prendas/id/6697f41a34cfacc0b93f3347
+|----------|------------------------|
+<p>Para eliminar una prenda de nuestra base de dato buscamos la prenda por ID</p>
+
+|||
+|--|--|
+|Status code <span style="color:green">200</span>  |Respuesta JSON
+|
+
+```bash
+{
+  "mensaje": "prenda eliminada",
+  "docs": {
+    "_id": "6697f41a34cfacc0b93f3347",
+    "nombre": "Bakend Untref",
+    "precio": 5000,
+    "categoria": "Remera",
+    "codigo": 32
+  }
+}
+```
+|||
+|--|--|
+|Status code <span style="color:red">400</span>  |Respuesta 
+|
+
+```
+ID incorrecto
+```
+  |||
+|--|--|
+|Status code <span style="color:yellow">500</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Servidor Inestable"
+}
+```
+## AUTORIZACION
+  ### Post Login
+  |   POST   | http://localhost:3000/login
+|----------|------------------------|
+<p>En nuestra api rest necesitamos estar registrado en nuestra base de datos
+
+En el Body completamos los campos de nombre y clave</p>
+
+```bash
+POST  http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "nombre":"****",
+    "clave":****
+}
+```
+|||
+|--|--|
+|Status code <span style="color:green">200</span>  |Respuesta JSON
+|
+```
+
+{
+  "mensaje": "Inicio de sesión exitoso"
+}
+```
+|||
+|--|--|
+|Status code <span style="color:red">400</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "usuario invalido"
+}
+```
+  |||
+|--|--|
+|Status code <span style="color:yellow">500</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Servidor Inestable"
+}
+```
+# Desconexión
+ |   GET   | http://localhost:3000/Desconexion
+|----------|------------------------|
+<p>Desconexio de nuestra api rest</p>
+
+|||
+|--|--|
+|Status code <span style="color:green">200</span>  |Respuesta JSON
+|
+```bash
+{
+  "mensaje": "Desconectado"
+}
+```
+¨[subir](#api-rest)
