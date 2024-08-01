@@ -1,5 +1,5 @@
 ###
-POST http://localhost:3000/Newprendas
+POST http://localhost:3000/prendas
 Content-Type: application/json
 
 {
@@ -12,12 +12,13 @@ Content-Type: application/json
 GET http://localhost:3000/prendas/all
 
 
-###
-
-DELETE http://localhost:3000/prendas/id/6697f41a34cfacc0b93f3347
 
 ###
-PATCH http://localhost:3000/prendas/Modifict/66952a6e7d3eef55b2a666
+
+DELETE http://localhost:3000/prendas/id/66ab949d15ff59d997f7c201
+
+###
+PATCH http://localhost:3000/prendas/Modifict/66ab949d15ff59d997f7c201
 Content-Type: application/json
 
 {
