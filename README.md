@@ -184,7 +184,7 @@ Start the server
 ```
   
   ### Post sumar nueva prenda 
-  |   POST   | http://localhost:3000/Newprendas
+  |   POST   | http://localhost:3000/prendas
 |----------|------------------------|
 <p>Para sumar una prenda en nuestra base de datos,
 en el body ponemos en formato JSON nombre,precios,categoria.
